@@ -19,31 +19,33 @@ def thescoresn(n):
     if (n <len(scores)):
         indexn=scores[n]
         scoresn=data['scores'][indexn]
-        newlist={
-        indexn:scoresn
+        newlist1={
+            indexn:scoresn
         }
-    return (newlist)
+    return (newlist1)
 @app.route('/scores', methods=['POST'])
 def add_score_post_scores():
-    
-    key=request.json['key']
-    values=request.json['values']
-    newlist={
-        key:values
-        }
-    (data['scores'])[key]=values
-    return(newlist)
+    add_index=request.json['add_index']
+    add_values=request.json['add_values']
+    newlist2={
+        add_index:add_values
+    }
+    (data['scores'])[add_index]=add_values
+    return(newlist2)
 
 @app.route('/scores/<int:n>', methods=['PUT'])
 def add_score_put_scores(n):
     scores=list(data['scores'])
     if n<len(scores):
-        add_index=request.json['adding_index']
-        add_values=request.json['adding_values']
+        add_index=request.json['add_index']
+        add_values=request.json['add_values']
         if add_index!=scores[n]:
             del data['scores'][scores[n]]
         (data['scores'])[add_index]=add_values
-        return(thescores)
+        newlist3={
+            add_index:add_values
+        }
+        return(newlist3)
             
 if __name__ == '__main__':
     app.run()
